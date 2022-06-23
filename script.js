@@ -6,14 +6,25 @@ const size = 200;
 canvas.width = size * particleSize;
 canvas.height = size * particleSize;
 
-const particleAmount = 1000;
+const particleAmount = 5000;
 var particles = [];
 
 var mouseDown = false;
 
 canvas.addEventListener('mousedown',(evt)=>{
-  particles[Math.floor(evt.offsetY/particleSize)][Math.floor(evt.offsetX/particleSize)].wall = 1;
-  mouseDown = true;
+  const size = 50;
+  for(let row = 0; row < size; row++){
+    for(let colm = 0; colm < size; colm++){
+      if(Math.sqrt((row - size/2) * (row - size/2) + (colm - size/2) * (colm - size/2)) <  size/2){
+      // particles[Math.floor(evt.offsetY/particleSize) + row - size/2][Math.floor(evt.offsetX/particleSize) + colm - size/2] = {north:row - size/2 <= 0,east:colm - size/2 >= 0,south:row - size/2 >= 0,west:colm - size/2 <= 0};
+      particles[Math.floor(evt.offsetY/particleSize) + row - size/2][Math.floor(evt.offsetX/particleSize) + colm - size/2].north = 1;
+      // if(colm - size/2 > 0){
+      // }s
+      }
+    }
+  }
+  // particles[Math.floor(evt.offsetY/particleSize)][Math.floor(evt.offsetX/particleSize)].wall = 1;
+  // mouseDown = true;
 })
 
 canvas.addEventListener('mousemove',(evt)=>{
@@ -22,7 +33,7 @@ canvas.addEventListener('mousemove',(evt)=>{
 })
 
 canvas.addEventListener('mouseup',(evt)=>{
-  mouseDown = false;
+  // mouseDown = false;
 })
 
 function start() {
